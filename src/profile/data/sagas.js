@@ -83,6 +83,19 @@ export function* handleFetchProfile(action) {
         'visibility.social_links': 'all_users',
         'visibility.time_zone': 'all_users',
       });
+    } else if (isAuthenticatedUserProfile && result[0].accountPrivacy === 'private') {
+      yield call(ProfileApiService.patchPreferences, action.payload.username, {
+        account_privacy: 'custom',
+        'visibility.name': 'private',
+        'visibility.bio': 'private',
+        'visibility.course_certificates': 'private',
+        'visibility.country': 'private',
+        'visibility.date_joined': 'private',
+        'visibility.level_of_education': 'private',
+        'visibility.language_proficiencies': 'private',
+        'visibility.social_links': 'private',
+        'visibility.time_zone': 'private',
+      });
     }
 
     yield put(fetchProfileSuccess(
