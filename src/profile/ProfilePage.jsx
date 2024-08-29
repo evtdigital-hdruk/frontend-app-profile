@@ -42,6 +42,7 @@ import { profilePageSelector } from './data/selectors';
 import messages from './ProfilePage.messages';
 
 import withParams from '../utils/hoc';
+import ExtendedProfile from './forms/ExtendedProfile';
 
 ensureConfig(['CREDENTIALS_BASE_URL', 'LMS_BASE_URL'], 'ProfilePage');
 
@@ -182,7 +183,10 @@ class ProfilePage extends React.Component {
       visibilityCourseCertificates,
       bio,
       visibilityBio,
+      visibilityProfession,
+      visibilityJobTitle,
       requiresParentalConsent,
+      extendedProfile,
       isLoadingProfile,
     } = this.props;
 
@@ -274,6 +278,15 @@ class ProfilePage extends React.Component {
                 {...commonFormProps}
               />
             )}
+            <ExtendedProfile
+              extendedProfile={extendedProfile}
+              {...commonFormProps}
+              visibility={{
+                jobTitle: visibilityJobTitle,
+                profession: visibilityProfession,
+              }}
+
+            />
             {isSocialLinksBLockVisible && (
               <SocialLinks
                 socialLinks={socialLinks}
@@ -376,6 +389,14 @@ ProfilePage.propTypes = {
   learningGoal: PropTypes.string,
   visibilityLearningGoal: PropTypes.string,
 
+  // Extended Profile
+  extendedProfile: PropTypes.arrayOf(PropTypes.shape({
+    fieldName: PropTypes.string,
+    fieldValue: PropTypes.string,
+  })),
+  visibilityProfession: PropTypes.string.isRequired,
+  visibilityJobTitle: PropTypes.string.isRequired,
+
   // Other data we need
   profileImage: PropTypes.shape({
     src: PropTypes.string,
@@ -424,6 +445,7 @@ ProfilePage.defaultProps = {
   requiresParentalConsent: null,
   dateJoined: null,
   visibilityLearningGoal: null,
+  extendedProfile: [],
 };
 
 export default connect(
