@@ -35,6 +35,7 @@ export const editableFormModeSelector = createSelector(
     // or is being hidden from us (for other users' profiles)
     let propExists = account[formId] != null && account[formId].length > 0;
     propExists = formId === 'certificates' ? certificates.length > 0 : propExists; // overwrite for certificates
+    propExists = account.extendedProfile.some(field => field.fieldName === formId) || propExists;
     // If this isn't the current user's profile
     if (!isAuthenticatedUserProfile) {
       return 'static';
@@ -238,6 +239,8 @@ export const visibilitiesSelector = createSelector(
           visibilityLanguageProficiencies: preferences.visibilityLanguageProficiencies || 'all_users',
           visibilityName: preferences.visibilityName || 'all_users',
           visibilitySocialLinks: preferences.visibilitySocialLinks || 'all_users',
+          visibilityProfession: preferences.visibilityProfession || 'all_users',
+          visibilityJobTitle: preferences.visibilityJobTitle || 'all_users',
         };
       case 'private':
         return {
@@ -248,6 +251,8 @@ export const visibilitiesSelector = createSelector(
           visibilityLanguageProficiencies: 'private',
           visibilityName: 'private',
           visibilitySocialLinks: 'private',
+          visibilityProfession: 'private',
+          visibilityJobTitle: 'private',
         };
       case 'all_users':
       default:
@@ -263,6 +268,8 @@ export const visibilitiesSelector = createSelector(
           visibilityLanguageProficiencies: 'all_users',
           visibilityName: 'all_users',
           visibilitySocialLinks: 'all_users',
+          visibilityProfession: 'all_users',
+          visibilityJobTitle: 'all_users',
         };
     }
   },
@@ -310,6 +317,18 @@ export const formValuesSelector = createSelector(
     visibilitySocialLinks: chooseFormValue(
       drafts.visibilitySocialLinks,
       visibilities.visibilitySocialLinks,
+    ),
+    extendedProfile: chooseFormValue(
+      drafts.extendedProfile,
+      account.extendedProfile,
+    ),
+    visibilityProfession: chooseFormValue(
+      drafts.visibilityProfession,
+      visibilities.visibilityProfession,
+    ),
+    visibilityJobTitle: chooseFormValue(
+      drafts.visibilityJobTitle,
+      visibilities.visibilityJobTitle,
     ),
   }),
 );
@@ -368,6 +387,11 @@ export const profilePageSelector = createSelector(
     socialLinks: formValues.socialLinks,
     visibilitySocialLinks: formValues.visibilitySocialLinks,
     draftSocialLinksByPlatform,
+
+    // Extended profile fields
+    extendedProfile: formValues.extendedProfile,
+    visibilityProfession: formValues.visibilityProfession,
+    visibilityJobTitle: formValues.visibilityJobTitle,
 
     // Other data we need
     saveState,
