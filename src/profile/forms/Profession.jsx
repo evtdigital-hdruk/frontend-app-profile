@@ -21,6 +21,7 @@ class Profession extends React.Component {
   constructor(props) {
     super(props);
 
+    this.handleExtendedChange = this.handleExtendedChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClose = this.handleClose.bind(this);
