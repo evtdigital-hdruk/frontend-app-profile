@@ -15,7 +15,6 @@ class ExtendedProfile extends React.Component {
 
   handleExtendedChange(name, value) {
     const extendedProfile = [...this.props.extendedProfile];
-    // console.log(name, value);
     extendedProfile[extendedProfile.findIndex((field) => field.fieldName === name)] = {
       fieldName: name,
       fieldValue: value,
@@ -33,11 +32,9 @@ class ExtendedProfile extends React.Component {
       return acc;
     }, {});
 
-    console.log(visibility);
-
     return (
       <div>
-        {extendedProfileFieldsObjects.job_title
+        {'job_title' in extendedProfileFieldsObjects
           && (
             <JobTitle
               jobTitle={extendedProfileFieldsObjects.job_title}
@@ -47,7 +44,7 @@ class ExtendedProfile extends React.Component {
               {...commonFormProps}
             />
           )}
-        {extendedProfileFieldsObjects.profession
+        {'profession' in extendedProfileFieldsObjects
           && (
             <Profession
               profession={extendedProfileFieldsObjects.profession}
