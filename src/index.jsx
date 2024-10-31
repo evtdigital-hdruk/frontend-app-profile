@@ -26,11 +26,13 @@ import './index.scss';
 import Head from './head/Head';
 
 import AppRoutes from './routes/AppRoutes';
+import GoogleTagManager from './utils/externalScripts';
 
 subscribe(APP_READY, () => {
   ReactDOM.render(
     <AppProvider store={configureStore()}>
       <Head />
+      <GoogleTagManager />
       <Header />
       <main id="main">
         <AppRoutes />
