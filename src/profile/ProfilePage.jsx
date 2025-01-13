@@ -210,6 +210,7 @@ class ProfilePage extends React.Component {
     const isCertificatesBlockVisible = isBlockVisible(courseCertificates.length);
     const isNameBlockVisible = isBlockVisible(name);
     const isLocationBlockVisible = isBlockVisible(country);
+    const isExtendedProfileVisible = isBlockVisible(extendedProfile);
 
     return (
       <div className="container-fluid">
@@ -277,15 +278,16 @@ class ProfilePage extends React.Component {
                 {...commonFormProps}
               />
             )}
-            <ExtendedProfile
-              extendedProfile={extendedProfile}
-              {...commonFormProps}
-              visibility={{
-                jobTitle: visibilityJobTitle,
-                profession: visibilityProfession,
-              }}
-
-            />
+            {isExtendedProfileVisible && (
+              <ExtendedProfile
+                extendedProfile={extendedProfile}
+                visibility={{
+                  profession: visibilityProfession,
+                  jobTitle: visibilityJobTitle,
+                }}
+                {...commonFormProps}
+              />
+            )}
             {isSocialLinksBLockVisible && (
               <SocialLinks
                 socialLinks={socialLinks}
