@@ -32,6 +32,7 @@ import PreferredLanguage from './forms/PreferredLanguage';
 import Education from './forms/Education';
 import SocialLinks from './forms/SocialLinks';
 import Bio from './forms/Bio';
+import ExtendedProfile from './forms/ExtendedProfile';
 import DateJoined from './DateJoined';
 import UserCertificateSummary from './UserCertificateSummary';
 import PageLoading from './PageLoading';
@@ -63,6 +64,9 @@ const ProfilePage = ({ params }) => {
     visibilityCountry,
     levelOfEducation,
     visibilityLevelOfEducation,
+    extendedProfile,
+    visibilityProfession,
+    visibilityJobTitle,
     socialLinks,
     draftSocialLinksByPlatform,
     visibilitySocialLinks,
@@ -349,6 +353,14 @@ const ProfilePage = ({ params }) => {
                     {...commonFormProps}
                   />
                   )}
+                  <ExtendedProfile
+                    extendedProfile={extendedProfile}
+                    {...commonFormProps}
+                    visibility={{
+                      jobTitle: visibilityJobTitle,
+                      profession: visibilityProfession,
+                    }}
+                  />
 
                   <AdditionalProfileFieldsSlot />
                 </div>
@@ -415,6 +427,14 @@ ProfilePage.propTypes = {
   visibilityCountry: PropTypes.string,
   levelOfEducation: PropTypes.string,
   visibilityLevelOfEducation: PropTypes.string,
+
+  // Extended Profile
+  extendedProfile: PropTypes.arrayOf(PropTypes.shape({
+    fieldName: PropTypes.string,
+    fieldValue: PropTypes.string,
+  })),
+  visibilityProfession: PropTypes.string,
+  visibilityJobTitle: PropTypes.string,
   languageProficiencies: PropTypes.arrayOf(PropTypes.shape({
     code: PropTypes.string.isRequired,
   })),
@@ -448,6 +468,9 @@ ProfilePage.defaultProps = {
   profileImage: {},
   name: null,
   levelOfEducation: null,
+  extendedProfile: [],
+  visibilityProfession: null,
+  visibilityJobTitle: null,
   country: null,
   socialLinks: [],
   draftSocialLinksByPlatform: {},
