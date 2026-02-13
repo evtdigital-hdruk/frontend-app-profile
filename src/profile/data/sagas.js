@@ -81,6 +81,23 @@ export function* handleFetchProfile(action) {
         'visibility.language_proficiencies': 'all_users',
         'visibility.social_links': 'all_users',
         'visibility.time_zone': 'all_users',
+        'visibility.profession': 'all_users',
+        'visibility.job_title': 'all_users',
+      });
+    } else if (isAuthenticatedUserProfile && result[0].accountPrivacy === 'private') {
+      yield call(ProfileApiService.patchPreferences, action.payload.username, {
+        account_privacy: 'custom',
+        'visibility.name': 'private',
+        'visibility.bio': 'private',
+        'visibility.course_certificates': 'private',
+        'visibility.country': 'private',
+        'visibility.date_joined': 'private',
+        'visibility.level_of_education': 'private',
+        'visibility.language_proficiencies': 'private',
+        'visibility.social_links': 'private',
+        'visibility.time_zone': 'private',
+        'visibility.profession': 'private',
+        'visibility.job_title': 'private',
       });
     }
 
@@ -117,6 +134,7 @@ export function* handleSaveProfile(action) {
       'languageProficiencies',
       'name',
       'socialLinks',
+      'extendedProfile',
     ]);
 
     const preferencesDrafts = pick(drafts, [
@@ -127,6 +145,8 @@ export function* handleSaveProfile(action) {
       'visibilityLanguageProficiencies',
       'visibilityName',
       'visibilitySocialLinks',
+      'visibilityProfession',
+      'visibilityJobTitle',
     ]);
 
     if (Object.keys(preferencesDrafts).length > 0) {
