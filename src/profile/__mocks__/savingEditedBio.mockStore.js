@@ -26,7 +26,10 @@ module.exports = {
     },
     levelOfEducation: 'el',
     mailingAddress: null,
-    extendedProfile: [],
+    extendedProfile: [
+      { fieldName: 'job_title', fieldValue: 'Researcher' },
+      { fieldName: 'profession', fieldValue: 'Academia' },
+    ],
     dateJoined: '2017-06-07T00:44:23Z',
     accomplishmentsShared: false,
     isActive: true,
@@ -60,7 +63,10 @@ module.exports = {
         imageUrlSmall: 'http://localhost:18000/media/profile-images/d2a9bdc2ba165dcefc73265c54bf9a20_30.jpg?v=1552495012',
         hasImage: true
       },
-      extendedProfile: [],
+      extendedProfile: [
+      { fieldName: 'job_title', fieldValue: 'Researcher' },
+      { fieldName: 'profession', fieldValue: 'Academia' },
+    ],
       dateJoined: '2017-06-07T00:44:23Z',
       accomplishmentsShared: false,
       email: 'staff@example.com',
@@ -108,6 +114,8 @@ module.exports = {
       visibilityCountry: 'all_users',
       accountPrivacy: 'custom',
       visibilityLearningGoal: 'private',
+      visibilityJobTitle: 'all_users',
+      visibilityProfession: 'all_users',
     },
     courseCertificates: [
       {
